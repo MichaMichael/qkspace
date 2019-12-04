@@ -10,7 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_22_235737) do
+ActiveRecord::Schema.define(version: 2019_12_04_122919) do
+
+  create_table "data_migrations", id: false, force: :cascade do |t|
+    t.string "version", null: false
+    t.index ["version"], name: "unique_data_migrations", unique: true
+  end
 
   create_table "pages", force: :cascade do |t|
     t.string "title"
@@ -31,6 +36,7 @@ ActiveRecord::Schema.define(version: 2018_12_22_235737) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["project_id", "user_id"], name: "index_project_collaborations_on_project_id_and_user_id", unique: true
+    t.index ["project_id"], name: "index_project_collaborations_on_project_id"
     t.index ["user_id"], name: "index_project_collaborations_on_user_id"
   end
 
@@ -45,6 +51,7 @@ ActiveRecord::Schema.define(version: 2018_12_22_235737) do
     t.boolean "private", default: false
     t.boolean "secret_enabled", default: false, null: false
     t.string "secret_token"
+    t.string "yandex_metrika_tracker_id"
     t.index ["domain"], name: "index_projects_on_domain", unique: true
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
@@ -62,6 +69,7 @@ ActiveRecord::Schema.define(version: 2018_12_22_235737) do
     t.string "type"
     t.integer "project_id"
     t.index ["token"], name: "index_sessions_on_token", unique: true
+    t.index ["user_id"], name: "authenticatable"
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
