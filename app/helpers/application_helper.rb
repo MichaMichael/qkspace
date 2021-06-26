@@ -9,7 +9,7 @@ module ApplicationHelper
 
   def link_to_or_disable_current(text, url, *options)
     link_to_unless_current(text, url, *options) do
-      content_tag :p, text, class: 'text-muted'
+      content_tag :span, text, class: 'text-muted'
     end
   end
 
@@ -31,5 +31,15 @@ module ApplicationHelper
     link_to %{<span class="flag-icon flag-icon-#{country_code}"></span>}.html_safe,
       {locale: next_locale},
       title: t('views.switch_locale', locale: next_locale)
+  end
+
+  def main_host_url(path)
+    uri = URI::HTTP.build(host: Rails.application.config.x.host, port: request.port, path: path)
+    uri.scheme = request.scheme
+    uri.to_s
+  end
+
+  def opengraph_image_link
+    main_host_url("/images/opengraph/#{@project.id}/#{@page.id}/og-image.jpg")
   end
 end

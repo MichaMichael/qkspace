@@ -28,5 +28,7 @@ module Dostoevsky
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
 
     config.middleware.use DomainSpaceMiddleware
+    config.active_job.queue_adapter = :sidekiq
+    Redis.exists_returns_integer =  true
   end
 end

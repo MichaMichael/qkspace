@@ -21,8 +21,8 @@ $(document).on('turbolinks:load', function () {
       el: editorElement,
       initialValue: textarea.value,
       initialEditType: 'markdown',
-      previewStyle: 'tab',
-      height: '320px'
+      previewStyle: 'vertical',
+      height: '640px'
     });
 
     form.addEventListener('submit', function () {

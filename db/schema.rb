@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_22_235737) do
+ActiveRecord::Schema.define(version: 2020_07_10_202329) do
 
   create_table "pages", force: :cascade do |t|
     t.string "title"
@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(version: 2018_12_22_235737) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["project_id", "user_id"], name: "index_project_collaborations_on_project_id_and_user_id", unique: true
-    t.index ["user_id"], name: "index_project_collaborations_on_user_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -45,6 +44,8 @@ ActiveRecord::Schema.define(version: 2018_12_22_235737) do
     t.boolean "private", default: false
     t.boolean "secret_enabled", default: false, null: false
     t.string "secret_token"
+    t.string "yandex_metrika_tracker_id"
+    t.string "google_remarketing_tracker_id"
     t.index ["domain"], name: "index_projects_on_domain", unique: true
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
